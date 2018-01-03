@@ -93,6 +93,8 @@ public class DoubleTapLikeView extends RelativeLayout implements View.OnClickLis
         iconView.setLayoutParams(iconViewParams);
         if( iconId!=NO_IMAGE )
             iconView.setImageResource(iconId);
+        else
+            iconView.setImageResource(R.drawable.ic_heart);
         iconView.setVisibility(View.INVISIBLE);
         iconView.setTag("iconView");
         this.addView(iconView);
@@ -198,7 +200,10 @@ public class DoubleTapLikeView extends RelativeLayout implements View.OnClickLis
                 if( pressedTime +PRESS_TIME_GAP <= System.currentTimeMillis() ) {
                     if( !isDoubleTapped ) {
                         // Due to Thread, if you want to change UI through "onTap()", you should use Activity.runOnUiThread()
-                        mListener.onTap();
+                        if( mListener==null )
+                            Log.e("onTap" , "setOnTapListener is missing");
+                        else
+                            mListener.onTap();
                         interrupt();
                     }
                 }
@@ -219,7 +224,7 @@ public class DoubleTapLikeView extends RelativeLayout implements View.OnClickLis
                 animateIcon( (ImageView) view.findViewWithTag("iconView") );
 
             if( mListener==null )
-                Log.e("onDoubleTap" , "setOnDoubleTapClickListener is missing");
+                Log.e("onDoubleTap" , "setOnTapListener is missing");
             else
                 mListener.onDoubleTap(view);
         }

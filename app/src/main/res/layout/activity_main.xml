@@ -10,9 +10,8 @@
 
     <com.brouding.doubletaplikeview.DoubleTapLikeView
         android:id="@+id/layout_double_tap_like"
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="320dp"
-        android:background="#cccccc"
         app:src="@drawable/ic_launcher_background"
         app:scaleType="fitCenter"
         app:icon="@drawable/ic_heart"

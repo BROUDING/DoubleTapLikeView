@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
         // So basically, you can use ImageView methods into "mDoubleTapLikeView.imageView"
 
-
         mDoubleTapLikeView.setOnTapListener(new DoubleTapLikeView.OnTapListener() {
             @Override
             public void onDoubleTap(View view) {

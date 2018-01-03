@@ -1,0 +1,62 @@
+sudo: false
+language: android
+jdk: oraclejdk8
+android:
+  components:
+    - tools
+    - tools
+    - platform-tools
+    - build-tools-26.0.2
+    - android-26
+    - android-22
+    - extra-android-support
+    - extra-android-m2repository
+    - extra-google-m2repository
+
+    # Additional components
+    - extra-google-google_play_services
+    #- addon-google_apis-google-19
+
+    - addon-google_apis-google-26
+    - addon-google_apis-google-22
+
+    # Specify at least one system image, if you need to run emulator(s) during your tests
+    - sys-img-armeabi-v7a-google_apis-22
+    #- sys-img-x86-android-17
+
+  licenses:
+    - 'android-sdk-license.*'
+    - 'android-sdk-preview-license.*'
+
+before_install:
+
+# Install required components.
+- echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
+- echo yes | android update sdk --filter android-26 --no-ui --force > /dev/null
+- echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
+- echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
+
+# Android SDK Build-tools
+- echo yes | android update sdk --all --filter build-tools-26.0.2 --no-ui --force > /dev/null
+
+- mkdir "$ANDROID_HOME/licenses" || true
+- echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+- echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+- chmod +x gradlew
+- chmod +rx app
+
+- android list targets
+- echo no | android create avd --force -n test -t android-22 --abi google_apis/armeabi-v7a
+- emulator -avd test -no-window &
+- android-wait-for-emulator
+- adb shell input keyevent 82 &
+
+skip_cleanup: true
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: sh script/deploy.sh
+  on:
+    branch:
+    - master
