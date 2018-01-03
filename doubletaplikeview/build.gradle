@@ -5,7 +5,7 @@ publish {
     userOrg = 'brouding'
     groupId = 'com.brouding'
     artifactId = 'android-doubletaplikeview'
-    publishVersion = '0.1.0'
+    publishVersion = '0.1.1'
     desc = 'When user double tap the view, it will show an animation and you can do some actions with it'
     website = 'https://github.com/BROUDING/DoubleTapLikeView'
     issueTracker = "https://github.com/BROUDING/DoubleTapLikeView/issues"

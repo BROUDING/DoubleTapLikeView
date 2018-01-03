@@ -22,7 +22,7 @@ add below code in `build.gradle (Module: app)`
 ```gradle
 dependencies {
 	// ... other dependencies here
-    compile 'com.brouding:android-doubletaplikeview:0.1.0'
+    compile 'com.brouding:android-doubletaplikeview:0.1.1'
 }
 ```
 ---
