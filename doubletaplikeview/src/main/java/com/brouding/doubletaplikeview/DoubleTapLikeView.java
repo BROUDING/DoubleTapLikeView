@@ -12,13 +12,17 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.brouding.doubletaplikeview.extra.SingleTapThread;
+
 /**
  * Created by John on 30/12/17.
  */
 
 public class DoubleTapLikeView extends RelativeLayout implements View.OnClickListener {
     public  ImageView imageView, iconView;
+
     private OnTapListener mListener=null;
+    private SingleTapThread singleTapThread;
 
     private int  PRESS_TIME_GAP=200;
     private long pressedTime;
@@ -98,6 +102,8 @@ public class DoubleTapLikeView extends RelativeLayout implements View.OnClickLis
         iconView.setVisibility(View.INVISIBLE);
         iconView.setTag("iconView");
         this.addView(iconView);
+
+        singleTapThread = new SingleTapThread(pressedTime, PRESS_TIME_GAP, isDoubleTapped, mListener);
     }
 
     public DoubleTapLikeView setImageResource(@DrawableRes int resId) {
@@ -193,24 +199,6 @@ public class DoubleTapLikeView extends RelativeLayout implements View.OnClickLis
         });
     }
 
-    final Thread singleTapThread = new Thread() {
-        @Override
-        public void run() {
-            while( !isInterrupted() ) {
-                if( pressedTime +PRESS_TIME_GAP <= System.currentTimeMillis() ) {
-                    if( !isDoubleTapped ) {
-                        // Due to Thread, if you want to change UI through "onTap()", you should use Activity.runOnUiThread()
-                        if( mListener==null )
-                            Log.e("onTap" , "setOnTapListener is missing");
-                        else
-                            mListener.onTap();
-                        interrupt();
-                    }
-                }
-            }
-        }
-    };
-
     @Override
     public void onClick(final View view) {
         isDoubleTapped = false;
@@ -230,8 +218,10 @@ public class DoubleTapLikeView extends RelativeLayout implements View.OnClickLis
         }
         pressedTime = System.currentTimeMillis();
 
-        if( !isDoubleTapped && !singleTapThread.isAlive() )
+        if( !isDoubleTapped && !singleTapThread.isAlive() ) {
+            singleTapThread = new SingleTapThread(pressedTime, PRESS_TIME_GAP, isDoubleTapped, mListener);
             singleTapThread.start();
+        }
     }
 
     private ImageView.ScaleType getScaleType(String scaleType) {
