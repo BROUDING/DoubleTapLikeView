@@ -22,7 +22,7 @@ add below code in `build.gradle (Module: app)`
 ```gradle
 dependencies {
 	// ... other dependencies here
-    compile 'com.brouding:android-doubletaplikeview:0.1.5'
+    compile 'com.brouding:android-doubletaplikeview:0.2.0'
 }
 ```
 ---
@@ -38,7 +38,7 @@ mDoubleTapLikeView = findViewById(R.id.layout_double_tap_like);
 // mDoubleTapLikeView.disableAnimation(false);                              // You wouldn't use this...right?
 // mDoubleTapLikeView.setAdjustViewBounds(true);
 // mDoubleTapLikeView.setImageResource(R.drawable.ic_launcher_background);
-// mDoubleTapLikeView.setIconResource(R.drawable.ic_heart);
+// mDoubleTapLikeView.setIconResource(R.drawable.ANIMATION_ICON_ID);
 // mDoubleTapLikeView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 // mDoubleTapLikeView.setDoubleTapGap(200);                                // Keep this time short ( 200~400 )^
 
