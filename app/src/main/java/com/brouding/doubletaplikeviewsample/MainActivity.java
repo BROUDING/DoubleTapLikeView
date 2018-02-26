@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         // mDoubleTapLikeView.disableAnimation(false);                              // You wouldn't use this...right?
         // mDoubleTapLikeView.setAdjustViewBounds(true);
         // mDoubleTapLikeView.setImageResource(R.drawable.ic_launcher_background);
-        // mDoubleTapLikeView.setIconResource(R.drawable.ic_heart);
+        // mDoubleTapLikeView.setIconResource(R.drawable.ic_ANIMATING_ICON);
         // mDoubleTapLikeView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         // mDoubleTapLikeView.setDoubleTapGap(200);                                // Keep this time short ( 200~400 )^
 
